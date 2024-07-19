@@ -9,5 +9,21 @@ package com.mycompany.hotel.habitacion;
  * @author Jhonk
  */
 public class HabitacionSuite extends Habitacion{
+    String tipo ="Suite";
+    
+
+    public HabitacionSuite(int numeroHabitacion, int numeroCamas, double precio, String tipoHabitacion, String estado) {
+        super(numeroHabitacion, numeroCamas, precio, tipoHabitacion, estado);
+        
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
     
 }

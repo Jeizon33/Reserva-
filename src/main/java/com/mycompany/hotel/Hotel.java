@@ -27,8 +27,7 @@ public class Hotel {
         //ArrayList<ClienteVip> clVip = new ArrayList<>();
         ArrayList<Cliente> cl = new ArrayList<>();
         ArrayList<Reserva> reserva = new ArrayList<>();
-        ArrayList<Habitacion> habitaciones = new ArrayList<>();
-        
+        ArrayList<Habitacion> habitaciones = new ArrayList<>();        
         
         while (ejecucion){
             mostrarMenu();
@@ -36,6 +35,7 @@ public class Hotel {
             scanner.nextLine();
             switch (opcion) {
                 case 1: //Resgistrar cliente
+                    System.out.println("********************************");
                     System.out.print("Ingrese su número de cédula: ");
                     //String cedulaString = scanner.nextLine();
                     cedula = Integer.parseInt(scanner.nextLine());
@@ -66,6 +66,7 @@ public class Hotel {
                     }
                     break;
                 case 2: //Realizar reserva
+                    System.out.println("********************************");
                     Random random =new Random();
                     int numeroReserva = random.nextInt(100);
                     System.out.print("Ingrese el numero de cedula: ");
@@ -85,6 +86,7 @@ public class Hotel {
                     System.out.println("Reserva generada con el numero: " +numeroReserva);
                     break;
                 case 3://cancelarReserva
+                    System.out.println("********************************");
                     System.out.println("Ingrese el codigo de la reserva que desea cancelar: ");
                     int codReserva = Integer.parseInt(scanner.nextLine());
                     for (Reserva reservas : reserva) {
@@ -96,6 +98,7 @@ public class Hotel {
                     }
                     break;
                 case 4://Listar Reservas
+                    System.out.println("********************************");
                     for (Reserva reservas : reserva) {
                         System.out.println("\nEstado de reserva: " +reservas.getEstadoReserva());
                         System.out.println("Cedula de cliente: " +reservas.getIdCliente());
@@ -107,6 +110,7 @@ public class Hotel {
                     }
                     break;
                 case 5://Listar reserva por cliente
+                    System.out.println("********************************");
                     System.out.println("Ingrese el numero de cedula del cliente: ");
                     int codCedula = Integer.parseInt(scanner.nextLine());
                     for (Reserva cliente : reserva) {
@@ -121,23 +125,51 @@ public class Hotel {
                         }
                     }
                     break;
-                case 6:
-                    //listarHabitacionesDisponibles();
+                case 6://listarHabitacionesDisponibles();
+                    System.out.println("********************************");
+                    for (Habitacion habitacion : habitaciones){
+                        if (habitacion.getEstado().equals("Disponible")) {
+                            System.out.println("El numero de la habitacion es: "+habitacion.getNumeroHabitacion());
+                            System.out.println("Esta"+habitacion.getEstado());
+                            System.out.println("El numero de camas es: " +habitacion.getNumeroCamas());
+                            System.out.println("El precio es: "+habitacion.getPrecio());
+                            System.out.println("********************************");
+                        }
+                    }
                     break;
-                case 7:
-                    //registrarServiciosAdicionales();
+                case 7://registrarServiciosAdicionales();
+                    System.out.println("********************************");
+                    System.out.print("Ingrese el numero de la nueva habitacion: ");
+                    int nHabitacion = Integer.parseInt(scanner.nextLine());
+
+                    System.out.print("Ingrese el tipo de habitacion(Suite/Penthouse/Regular): ");
+                    String tipo = scanner.nextLine();
+
+                    System.out.print("Ingrese el numero de camas: ");
+                    int nCamas = Integer.parseInt(scanner.nextLine());
+
+                    System.out.print("Ingrese el precio por noche: ");
+                    double precio = Double.parseDouble(scanner.nextLine());
+                    
+                    if (tipo.equals("Suite")) {
+                        habitaciones.add(new HabitacionSuite(nHabitacion, nCamas, precio, "Suite", "Disponible"));
+                    } else if (tipo.equals("Penthouse")){
+                        habitaciones.add(new HabitacionPenthouse(nHabitacion, nCamas, precio, "Penthouse", "Disponible"));
+                    } else if(tipo.equals("Regular")){
+                        habitaciones.add(new Habitacion(nHabitacion, nCamas, precio, "Penthouse", "Disponible"));
+                    } else {
+                        System.out.println("Esa no es una opcion");
+                    }
                     break;
                 case 0:
                     ejecucion = false;
-                    System.out.println(reserva.get(0).getEstadoReserva());
+                    //System.out.println(reserva.get(0).getEstadoReserva());
                     break;
                 default:
                     System.out.println("Esa no es una opcion");
             }
         }
-        
-        
-        
+           
     }
     private static void mostrarMenu() {
         System.out.println("\n--- Menú de Gestión de Hotel ---");
@@ -147,9 +179,10 @@ public class Hotel {
         System.out.println("4. Listar Reservas");
         System.out.println("5. Buscar Reserva por Cliente");
         System.out.println("6. Listar Habitaciones Disponibles");
-        System.out.println("7. Registrar Servicios Adicionales");
+        System.out.println("7. Registrar nueva habitacion");
         System.out.println("0. Salir");
         System.out.print("Selecciona una opción: ");
+        
         }
     
     
