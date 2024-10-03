@@ -6,7 +6,7 @@ package com.mycompany.hotel.cliente;
 
 /**
  *
- * @author JeisonH
+ * @author Jhonk
  */
 public class Cliente {
     int Id;
